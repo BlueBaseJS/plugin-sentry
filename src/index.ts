@@ -1,23 +1,36 @@
 import { BootOptions, createPlugin } from "@bluebase/core";
 
-const Raven = require('raven-js');
-
-
+const Raven = require("raven-js");
 
 export default createPlugin({
   name: "Sentry Plugin",
   key: "sentry-plugin",
 
   defaultConfigs: {
-      'plugin.sentry.url': null,
+    "plugin.sentry.url": null
   },
   filters: {
     "bluebase.boot.end": (bootOptions: BootOptions, _ctx: any, BB) => {
-      const url = BB.Configs.getValue('plugin.sentry.url');
-      if(url !== null){
-          Raven.config(url).install();
+      const url = BB.Configs.getValue("plugin.sentry.url");
+      if (url !== null) {
+        Raven.config(url).install();
       }
       return bootOptions;
+    },
+    "bluebase.logger.log": (message: string, data: any) => {
+      
+    },
+    "bluebase.logger.info": (message: string, data: any) => {
+      // send data to logging provider here
+    },
+    "bluebase.logger.debug": (message: string, data: any) => {
+      // send data to logging provider here
+    },
+    "bluebase.logger.error": (message: string, data: any) => {
+      // send data to logging provider here
+    },
+    "bluebase.logger.error": (message: string, data: any) => {
+      // send data to logging provider here
     }
   }
 });
