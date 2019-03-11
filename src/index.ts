@@ -17,20 +17,20 @@ export default createPlugin({
       }
       return bootOptions;
     },
-    "bluebase.logger.log": (message: string, data: any) => {
-      Raven.captureMessage(message, data);
+    "bluebase.logger.log": (message: string, data: object) => {
+      Raven.captureMessage(message, Object.assign({}, {logger: 'log'}, (data || {})));
     },
-    "bluebase.logger.info": (message: string, data: any) => {
-      Raven.captureMessage(message, data);
+    "bluebase.logger.info": (message: string, data: object) => {
+      Raven.captureMessage(message, Object.assign({}, {logger: 'info'}, (data || {})));
     },
-    "bluebase.logger.debug": (message: string, data: any) => {
-      Raven.captureMessage(message, data);
+    "bluebase.logger.debug": (message: string, data: object) => {
+      Raven.captureMessage(message, Object.assign({}, {logger: 'debug'}, (data || {})));
     },
-    "bluebase.logger.error": (message: string, data: any) => {
-      Raven.captureMessage(message, data);
+    "bluebase.logger.error": (message: string, data: object) => {
+      Raven.captureMessage(message, Object.assign({}, {logger: 'error'}, (data || {})));
     },
-    "bluebase.logger.warn": (message: string, data: any) => {
-      Raven.captureMessage(message, data);
+    "bluebase.logger.warn": (message: string, data: object) => {
+      Raven.captureMessage(message, Object.assign({}, {logger: 'warn'}, (data || {})));
     }
   }
 });
