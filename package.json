@@ -1,0 +1,24 @@
+{
+  "name":"@bluebase/plugin-sentry",
+  "scripts": {
+    "storybook:start": "bluebase storybook:start"
+  },
+  "dependencies": {
+    "deepmerge": "^3.2.0",
+    "raven-js": "^3.27.0",
+    "react": "^16"
+  },
+  "devDependencies": {
+    "@bluebase/cli-essentials": "^0.0.2",
+    "@bluebase/core": "^4.0.0-aplha.10",
+    "@bluebase/storybook-addon": "^3.0.0",
+    "@blueeast/tslint-config-blueeast": "^0.7.0",
+    "@storybook/addon-actions": "^5.0.0",
+    "@storybook/addon-links": "^5.0.0",
+    "@storybook/react": "^5.0.0",
+    "@types/deepmerge": "^2.2.0",
+    "@types/react": "^16.8.7",
+    "babel-loader": "^8.0.4",
+    "typescript": "^3"
+  }
+}
