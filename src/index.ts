@@ -18,19 +18,19 @@ export default createPlugin({
       return bootOptions;
     },
     "bluebase.logger.log": (message: string, data: object) => {
-      Raven.captureMessage(message, Object.assign({}, {logger: 'log'}, (data || {})));
+      Raven.captureMessage(message, { logger: 'log', ...data });
     },
     "bluebase.logger.info": (message: string, data: object) => {
-      Raven.captureMessage(message, Object.assign({}, {logger: 'info'}, (data || {})));
+      Raven.captureMessage(message, { logger: 'info', ...data });
     },
     "bluebase.logger.debug": (message: string, data: object) => {
-      Raven.captureMessage(message, Object.assign({}, {logger: 'debug'}, (data || {})));
+      Raven.captureMessage(message, { logger: 'info', ...data });
     },
     "bluebase.logger.error": (message: string, data: object) => {
-      Raven.captureMessage(message, Object.assign({}, {logger: 'error'}, (data || {})));
+      Raven.captureMessage(message, { logger: 'error', ...data });
     },
     "bluebase.logger.warn": (message: string, data: object) => {
-      Raven.captureMessage(message, Object.assign({}, {logger: 'warn'}, (data || {})));
+      Raven.captureMessage(message, { logger: 'warn', ...data });
     }
   }
 });
