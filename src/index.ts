@@ -18,19 +18,19 @@ export default createPlugin({
       return bootOptions;
     },
     "bluebase.logger.log": (message: string, data: any) => {
-      
+      Raven.captureMessage(message, data);
     },
     "bluebase.logger.info": (message: string, data: any) => {
-      // send data to logging provider here
+      Raven.captureMessage(message, data);
     },
     "bluebase.logger.debug": (message: string, data: any) => {
-      // send data to logging provider here
+      Raven.captureMessage(message, data);
     },
     "bluebase.logger.error": (message: string, data: any) => {
-      // send data to logging provider here
+      Raven.captureMessage(message, data);
     },
-    "bluebase.logger.error": (message: string, data: any) => {
-      // send data to logging provider here
+    "bluebase.logger.warn": (message: string, data: any) => {
+      Raven.captureMessage(message, data);
     }
   }
 });
