@@ -1,3 +1,9 @@
+## [1.0.1](https://github.com/BlueBaseJS/plugin-sentry/compare/v1.0.0...v1.0.1) (2019-10-08)
+
+### Bug Fixes
+
+-   **package:** FIxed package name ([9effeea](https://github.com/BlueBaseJS/plugin-sentry/commit/9effeea))
+
 # 1.0.0 (2019-10-08)
 
 ### Features
