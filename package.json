@@ -1,5 +1,5 @@
 {
-  "name": "plugin-senetry",
+  "name": "@bluebase/plugin-sentry",
   "description": "A BlueBase plugin boilerplate!",
   "author": "BlueEast Team <code@blueeast.com>",
   "version": "0.0.1",
