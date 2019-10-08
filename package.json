@@ -6,7 +6,7 @@
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "module": "dist/index.js",
-  "repository": "https://github.com/mhusnainnaseer786@gmail.com/plugin-untitled",
+  "repository": "https://github.com/BlueBaseJS/plugin-sentry",
   "license": "MIT",
   "keywords": [],
   "config": {},
