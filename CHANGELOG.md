@@ -1,3 +1,13 @@
+# [2.0.0](https://github.com/BlueBaseJS/plugin-sentry/compare/v1.0.1...v2.0.0) (2020-01-01)
+
+### Features
+
+-   Updated to latest Sentry API ([f2305ff](https://github.com/BlueBaseJS/plugin-sentry/commit/f2305ff))
+
+### BREAKING CHANGES
+
+-   Updated to latest Sentry SDK. Also, the plugin no longer inits Sentry. That can be done in bluebase.ts file directly.
+
 ## [1.0.1](https://github.com/BlueBaseJS/plugin-sentry/compare/v1.0.0...v1.0.1) (2019-10-08)
 
 ### Bug Fixes
