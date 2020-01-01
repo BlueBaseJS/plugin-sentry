@@ -38,7 +38,7 @@ export default createPlugin({
 			return message;
 		},
 
-		'bluebase.logger.log': (message: string, data: object) => {
+		'bluebase.logger.log': (message: string, data: { params: any[] }) => {
 			Sentry.withScope(scope => {
 				scope.setLevel(Sentry.Severity.Log);
 				scope.setExtras(data);

@@ -1,85 +1,145 @@
+import * as Sentry from '@sentry/react-native';
+
 import { BlueBase } from '@bluebase/core';
 import Plugin from '../index';
-import Raven from 'raven-js';
 
-const url = '';
+jest.mock('@sentry/react-native');
+// import wait from 'waait';
+
 describe('Plugin Sentry Test', () => {
+	beforeEach(() => {
+		// jest.clearAllMocks();
+		// jest.restoreAllMocks();
+		// jest.resetAllMocks();
+	});
+
 	test('Plugin should be correctly registered', async () => {
 		const BB = new BlueBase();
 		await BB.Plugins.register(Plugin);
 		expect(BB.Plugins.has('plugin-senetry')).toBeTruthy();
 	});
 
-	test('Url test', async done => {
-		const BB = new BlueBase();
-		await BB.Plugins.register(Plugin);
-		BB.Configs.register('plugin.sentry.url', 'https://google.com');
-
-		await BB.boot();
-
-		setTimeout(() => {
-			expect(Raven.config(url).install()).toBeFalsy();
-			done();
-		});
-	});
-	test('Log', async done => {
+	test('debug', async done => {
 		const BB = new BlueBase();
 		await BB.Plugins.register(Plugin);
 		await BB.boot();
 
-		BB.Logger.log('log');
+		BB.Logger.debug('debug', { foo: 'bar' });
 
 		setTimeout(() => {
-			expect(Raven.captureMessage).toBeCalled();
-			done();
-		});
-	});
-	test('Info', async done => {
-		const BB = new BlueBase();
-		await BB.Plugins.register(Plugin);
-		await BB.boot();
+			const calls = (Sentry.withScope as jest.Mock).mock.calls;
+			const cb = calls[calls.length - 1][0];
 
-		BB.Logger.info('info');
+			const scope = {
+				setExtras: jest.fn(),
+				setLevel: jest.fn(),
+			};
 
-		setTimeout(() => {
-			expect(Raven.captureMessage).toBeCalled();
-			done();
-		});
-	});
-	test('Warn', async done => {
-		const BB = new BlueBase();
-		await BB.Plugins.register(Plugin);
-		await BB.boot();
+			cb(scope);
 
-		BB.Logger.warn('warn');
-
-		setTimeout(() => {
-			expect(Raven.captureMessage).toBeCalled();
-			done();
-		});
-	});
-	test('Error', async done => {
-		const BB = new BlueBase();
-		await BB.Plugins.register(Plugin);
-		await BB.boot();
-
-		BB.Logger.error('error');
-
-		setTimeout(() => {
-			expect(Raven.captureMessage).toBeCalled();
+			expect(Sentry.captureException).toHaveBeenLastCalledWith('debug');
+			expect(scope.setLevel).toHaveBeenLastCalledWith(Sentry.Severity.Debug);
+			expect(scope.setExtras).toHaveBeenLastCalledWith({ params: [{ foo: 'bar' }] });
 			done();
 		});
 	});
 
-	test('Debug', async done => {
+	test('error', async done => {
+		jest.clearAllMocks();
 		const BB = new BlueBase();
 		await BB.Plugins.register(Plugin);
 		await BB.boot();
 
-		BB.Logger.debug('debug');
+		BB.Logger.error('error', { foo: 'bar' });
 
 		setTimeout(() => {
-			expect(Raven.captureMessage).toBeCalled();
+			const cb = (Sentry.withScope as jest.Mock).mock.calls[0][0];
+
+			const scope = {
+				setExtras: jest.fn(),
+				setLevel: jest.fn(),
+			};
+
+			cb(scope);
+
+			expect(Sentry.captureException).toHaveBeenLastCalledWith('error');
+			expect(scope.setLevel).toHaveBeenLastCalledWith(Sentry.Severity.Error);
+			expect(scope.setExtras).toHaveBeenLastCalledWith({ params: [{ foo: 'bar' }] });
+			done();
+		});
+	});
+
+	test('info', async done => {
+		const BB = new BlueBase();
+		await BB.Plugins.register(Plugin);
+		await BB.boot();
+
+		BB.Logger.info('info', { foo: 'bar' });
+
+		setTimeout(() => {
+			const calls = (Sentry.withScope as jest.Mock).mock.calls;
+			const cb = calls[calls.length - 1][0];
+
+			const scope = {
+				setExtras: jest.fn(),
+				setLevel: jest.fn(),
+			};
+
+			cb(scope);
+
+			expect(Sentry.captureException).toHaveBeenLastCalledWith('info');
+			expect(scope.setLevel).toHaveBeenLastCalledWith(Sentry.Severity.Info);
+			expect(scope.setExtras).toHaveBeenLastCalledWith({ params: [{ foo: 'bar' }] });
+			done();
+		});
+	});
+
+	test('log', async done => {
+		const BB = new BlueBase();
+		await BB.Plugins.register(Plugin);
+		await BB.boot();
+
+		BB.Logger.log('log', { foo: 'bar' });
+
+		setTimeout(() => {
+			const calls = (Sentry.withScope as jest.Mock).mock.calls;
+			const cb = calls[calls.length - 1][0];
+
+			const scope = {
+				setExtras: jest.fn(),
+				setLevel: jest.fn(),
+			};
+
+			cb(scope);
+
+			expect(Sentry.captureMessage).toHaveBeenLastCalledWith('log');
+			expect(scope.setLevel).toHaveBeenLastCalledWith(Sentry.Severity.Log);
+			expect(scope.setExtras).toHaveBeenLastCalledWith({ params: [{ foo: 'bar' }] });
+			done();
+		});
+	});
+
+	test('warn', async done => {
+		const BB = new BlueBase();
+		await BB.Plugins.register(Plugin);
+		await BB.boot();
+
+		BB.Logger.warn('warn', { foo: 'bar' });
+
+		setTimeout(() => {
+			const calls = (Sentry.withScope as jest.Mock).mock.calls;
+			const cb = calls[calls.length - 1][0];
+
+			const scope = {
+				setExtras: jest.fn(),
+				setLevel: jest.fn(),
+			};
+
+			cb(scope);
+
+			expect(Sentry.captureException).toHaveBeenLastCalledWith('warn');
+			expect(scope.setLevel).toHaveBeenLastCalledWith(Sentry.Severity.Warning);
+			expect(scope.setExtras).toHaveBeenLastCalledWith({ params: [{ foo: 'bar' }] });
 			done();
 		});
 	});
