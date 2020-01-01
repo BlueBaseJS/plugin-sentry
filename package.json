@@ -60,8 +60,8 @@
     "node": ">=8.9"
   },
   "dependencies": {
+    "@sentry/react-native": "^1.2.1",
     "deepmerge": "^4.1.1",
-    "raven-js": "^3.27.2",
     "react": "^16.10.2",
     "react-native": "^0.59.8",
     "tslib": "^1.10.0"
