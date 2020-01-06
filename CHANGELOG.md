@@ -1,3 +1,9 @@
+# [2.1.0](https://github.com/BlueBaseJS/plugin-sentry/compare/v2.0.0...v2.1.0) (2020-01-06)
+
+### Features
+
+-   Added @sentry/browser for web ([986f80e](https://github.com/BlueBaseJS/plugin-sentry/commit/986f80e))
+
 # [2.0.0](https://github.com/BlueBaseJS/plugin-sentry/compare/v1.0.1...v2.0.0) (2020-01-01)
 
 ### Features
