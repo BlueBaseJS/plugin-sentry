@@ -1,4 +1,4 @@
-import * as Sentry from '@sentry/react-native';
+import * as Sentry from './lib';
 
 import { VERSION } from './version';
 import { createPlugin } from '@bluebase/core';

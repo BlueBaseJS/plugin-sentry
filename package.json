@@ -60,6 +60,7 @@
     "node": ">=8.9"
   },
   "dependencies": {
+    "@sentry/browser": "^5.10.2",
     "@sentry/react-native": "^1.2.1",
     "deepmerge": "^4.2.2",
     "react": "^16.12.0",
